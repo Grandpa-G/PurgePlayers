@@ -107,7 +107,7 @@ namespace PurgePlayers
             PurgePlayersArguments arguments = new PurgePlayersArguments(args.Parameters.ToArray());
             if (arguments.Contains("-help"))
             {
-                args.Player.SendMessage("Syntax: /purgeplayer [-help] ", Color.Red);
+                args.Player.SendMessage("Syntax: /purgeplayers [-help] ", Color.Red);
                 args.Player.SendMessage("Flags: ", Color.LightSalmon);
                 args.Player.SendMessage(" -purge        starts purge operation", Color.LightSalmon);
                 args.Player.SendMessage(" -reload/-r    reloads options from purgeplayers.json config file", Color.LightSalmon);
@@ -125,6 +125,7 @@ namespace PurgePlayers
             {
                 if (args.Parameters.Count > 1)
                     purgeBeforeDays = Int32.Parse(args.Parameters[1]);
+                Console.WriteLine(" {0} Days before to purge is " + purgeBeforeDays.ToString(), Name);
                 return;
             }
 
@@ -150,6 +151,7 @@ namespace PurgePlayers
                     executePurge.Elapsed += autoPurge;    // Event to do your tasks.
                     executePurge.AutoReset = true;
                     executePurge.Start();
+                    Console.WriteLine(" {0} Config file reloaded.", Name);
                 }
                 return;
             }
@@ -157,21 +159,25 @@ namespace PurgePlayers
             if (arguments.Contains("-v") || arguments.Contains("-verbose"))
             {
                 verbose = true;
+                Console.WriteLine(" {0} Verbose is " + verbose.ToString(), Name);
                 return;
             }
             if (arguments.Contains("-!v") || arguments.Contains("-!verbose"))
             {
                 verbose = false;
+                Console.WriteLine(" {0} Verbose is " + verbose.ToString(), Name);
                 return;
             }
             if (arguments.Contains("-p") || arguments.Contains("-preview"))
             {
                 preview = true;
+                Console.WriteLine(" {0} Preview is " + preview.ToString(), Name);
                 return;
             }
             if (arguments.Contains("-!p") || arguments.Contains("-!preview"))
             {
                 preview = false;
+                Console.WriteLine(" {0} Preview is " + preview.ToString(), Name);
                 return;
             }
 
