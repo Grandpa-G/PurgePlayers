@@ -151,8 +151,8 @@ namespace PurgePlayers
                     executePurge.Elapsed += autoPurge;    // Event to do your tasks.
                     executePurge.AutoReset = true;
                     executePurge.Start();
-                    Console.WriteLine(" {0} Config file reloaded.", Name);
                 }
+                Console.WriteLine(" {0} Config file reloaded.", Name);
                 return;
             }
 
@@ -207,7 +207,7 @@ namespace PurgePlayers
             DateTime keepDate = DateTime.Today.AddDays(-purgeBeforeDays);
             string doNotDelete = String.Join("','", purgePlayersConfig.DoNotDelete);
             string DoNotDeleteGroups = String.Join("','", purgePlayersConfig.DoNotDeleteGroups);
-            string sql = string.Format("SELECT * FROM users where ((LastAccessed is null) or (LastAccessed < datetime(\"{0}\")))", String.Format("{0:yyyy-MM-dd HH:mm:ss}", keepDate));
+            string sql = string.Format("SELECT * FROM users where ((LastAccessed is null) or (LastAccessed < \"{0}\"))", String.Format("{0:yyyy-MM-dd HH:mm:ss}", keepDate));
             if (purgePlayersConfig.DoNotDelete.Length > 0)
                 sql = sql + " and Username not in ('" + doNotDelete + "')";
             if (purgePlayersConfig.DoNotDeleteGroups.Length > 0)
